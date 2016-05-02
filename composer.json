@@ -1,0 +1,23 @@
+{
+    "name": "foreverglory/order-bundle",
+    "type": "symfony-bundle",
+    "description": "Bundle",
+    "keywords": ["symfony", "bundle", "order"],
+    "homepage": "http://foreverglory.me",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ForeverGlory",
+            "email": "foreverglory@qq.com",
+            "homepage": "http://foreverglory.me"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"Glory\\Bundle\\OrderBundle\\": ""}
+    },
+    "require": {
+        "symfony/symfony": "~2.3"
+    },
+    "require-dev": {
+    }
+}
