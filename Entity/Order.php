@@ -13,11 +13,15 @@ namespace Glory\Bundle\OrderBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Glory\Bundle\OrderBundle\Model\Order as BaseOrder;
+use Glory\Bundle\OrderBundle\Model\OrderItemInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Order Entity
- * @ORM\MappedSuperclass
+ * 
+ * @ORM\Entity
+ * @ORM\Table("orders")
+ * 
  * @author ForeverGlory <foreverglory@qq.com>
  */
 class Order extends BaseOrder
@@ -96,7 +100,13 @@ class Order extends BaseOrder
     protected $data = array();
 
     /**
-     * @var integer
+     * @ORM\OneToMany(targetEntity="OrderItem", mappedBy="order")
+     */
+    protected $items = [];
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Symfony\Component\Security\Core\User\UserInterface")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
 
@@ -190,13 +200,13 @@ class Order extends BaseOrder
 
     public function setUpdatedTime($updateTime = 0)
     {
-        $this->updateTime = $updateTime? : time();
+        $this->updatedTime = $updateTime? : time();
         return $this;
     }
 
     public function getUpdatedTime()
     {
-        return $this->updateTime;
+        return $this->updatedTime;
     }
 
     public function setData($data)
@@ -208,6 +218,22 @@ class Order extends BaseOrder
     public function getData()
     {
         return $this->data;
+    }
+
+    public function addItem(OrderItemInterface $item)
+    {
+        $item->setOrder($this);
+        $this->items[] = $item;
+    }
+
+    public function setItems($items)
+    {
+        $this->items = $items;
+    }
+
+    public function getItems()
+    {
+        return $this->items;
     }
 
     public function setUser(UserInterface $user)
