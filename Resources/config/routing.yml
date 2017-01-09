@@ -1,3 +1,23 @@
-glory_order_homepage:
-    path:     /
-    defaults: { _controller: GloryOrderBundle:Default:index }
+glory_order:
+    path: /my/order
+    defaults: { _controller: GloryOrderBundle:User:index }
+
+glory_order_view:
+    path: /my/order/{id}
+    defaults: { _controller: GloryOrderBundle:User:view }
+
+glory_order_pay:
+    path: /my/order/{id}/pay
+    defaults: { _controller: GloryOrderBundle:User:pay}
+    
+glory_order_cancel:
+    path: /my/order/{id}/cancel
+    defaults: { _controller: GloryOrderBundle:User:cancel}
+
+glory_order_admin:
+    path:     /admin/order
+    defaults: { _controller: GloryOrderBundle:Admin:index }
+
+glory_order_admin_view:
+    path:     /admin/order/{id}
+    defaults: { _controller: GloryOrderBundle:Admin:view }
