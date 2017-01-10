@@ -11,30 +11,25 @@
 
 namespace Glory\Bundle\OrderBundle\Event;
 
-use Symfony\Component\EventDispatcher\Event;
-use Glory\Bundle\OrderBundle\Model\OrderInterface;
-
 /**
- * Description of OrderEvent
+ * Description of OrderPayEvent
  *
  * @author ForeverGlory <foreverglory@qq.com>
  */
-class OrderEvent extends Event
+class OrderPayEvent extends OrderEvent
 {
 
-    protected $order;
+    protected $isPaid = false;
 
-    public function __construct(OrderInterface $order)
+    public function paid()
     {
-        $this->order = $order;
+        $this->isPaid = true;
+        $this->stopPropagation();
     }
 
-    /**
-     * @return OrderInterface
-     */
-    public function getOrder()
+    public function isPaid()
     {
-        return $this->order;
+        return $this->isPaid;
     }
 
 }
