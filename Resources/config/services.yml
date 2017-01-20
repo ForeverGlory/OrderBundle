@@ -1,4 +1,8 @@
 services:
-#    glory_order.example:
-#        class: Glory\Bundle\OrderBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    glory_order.order_manager:
+        class: Glory\DoctrineManager\DoctrineManager
+        arguments: ['@doctrine']
+    glory_order.item_listener:
+        class: Glory\Bundle\OrderBundle\EventListener\ItemListener
+        tags:
+            -  { name: doctrine.event_subscriber }

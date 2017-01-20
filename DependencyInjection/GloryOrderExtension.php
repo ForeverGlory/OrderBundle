@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the current project.
+ * 
+ * (c) ForeverGlory <http://foreverglory.me/>
+ * 
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Glory\Bundle\OrderBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -14,6 +23,7 @@ use Symfony\Component\DependencyInjection\Loader;
  */
 class GloryOrderExtension extends Extension
 {
+
     /**
      * {@inheritdoc}
      */
@@ -22,7 +32,10 @@ class GloryOrderExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->getDefinition('glory_order.order_manager')->addMethodCall('setClass', [$config['order_class']]);
     }
+
 }

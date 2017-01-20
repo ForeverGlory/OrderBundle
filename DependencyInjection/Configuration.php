@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the current project.
+ * 
+ * (c) ForeverGlory <http://foreverglory.me/>
+ * 
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Glory\Bundle\OrderBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -12,6 +21,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
+
     /**
      * {@inheritdoc}
      */
@@ -20,10 +30,12 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('glory_order');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode->children()
+                ->scalarNode('order_class')->defaultValue('Glory\Bundle\OrderBundle\Entity\Order')->end()
+                ->end();
+
 
         return $treeBuilder;
     }
+
 }
